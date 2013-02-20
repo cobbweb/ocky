@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ocky.js Testing</title>
+  <link rel="stylesheet" href="../components/mocha/mocha.css" media="all">
+</head>
+<body>
+
+  <div id="mocha"></div>
+
+  <!-- test library stuff -->
+  <script src="../components/mocha/mocha.js"></script>
+  <script src="../components/chai/chai.js"></script>
+  <script src="../components/sinon.js/sinon.js"></script>
+  <script src="../components/sinon-chai/lib/sinon-chai.js"></script>
+
+  <script>
+    mocha.ui('bdd');
+    mocha.reporter('html');
+    expect = chai.expect;
+  </script>
+
+  <!-- Ocky + deps -->
+  <script src="../components/lodash/lodash.js"></script>
+  <script src="../components/backbone/backbone.js"></script>
+  <script src="../src/ocky.js"></script>
+
+  <!-- tests -->
+  <script src="test.js"></script>
+
+  <!-- run forest -->
+  <script>
+    if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
+    else { mocha.run(); }
+  </script>
+</body>
+</html>

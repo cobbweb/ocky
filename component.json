@@ -1,0 +1,9 @@
+{
+  "name": "Ocky",
+  "author": "Andrew Cobby <andrew.cobby@gmail.com>",
+  "version": "0.0.1",
+  "dependencies": {
+    "backbone": "~0.9.10",
+    "lodash": "~1.0.1"
+  }
+}
