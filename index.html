@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ocky</title>
+</head>
+<body>
+  
+  <script src="/components/lodash/lodash.js"></script>
+  <script src="/components/backbone/backbone.js"></script>
+  <script src="/src/ocky.js"></script>
+
+  <script>
+    var App = new Ocky('App');
+
+    App.module('Views', function(Views, Backbone) {
+      Views.ListView = Backbone.View.extend({});
+    });
+
+    console.log(App.Views.ListView);
+  </script>
+</body>
+</html>

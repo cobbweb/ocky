@@ -1,57 +1,54 @@
-/*global module:false*/
 module.exports = function(grunt) {
+	'use strict';
 
-  // Project configuration.
-  grunt.initConfig({
-    meta: {
-      version: '0.1.0',
-      banner: '/*! PROJECT_NAME - v<%= meta.version %> - ' +
-        '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        '* http://PROJECT_WEBSITE/\n' +
-        '* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
-        'YOUR_NAME; Licensed MIT */'
-    },
-    lint: {
-      files: ['grunt.js', 'src/**/*.js', 'tests/**/*.js']
-    },
-    test: {
-      files: ['tests/**/*.js']
-    },
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+
+	grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
+      '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+      '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
+      '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
+      ' Licensed <%= pkg.license %> */\n',
+
     concat: {
+      options: {
+        banner: '<%= banner %>',
+        stripBanners: true
+      },
       dist: {
-        src: ['<banner:meta.banner>', '<file_strip_banner:src/FILE_NAME.js>'],
-        dest: 'dist/FILE_NAME.js'
+        src: ['src/ocky.js'],
+        dest: 'dist/ocky.js'
       }
-    },
-    min: {
-      dist: {
-        src: ['<banner:meta.banner>', '<config:concat.dist.dest>'],
-        dest: 'dist/FILE_NAME.min.js'
-      }
-    },
-    watch: {
-      files: '<config:lint.files>',
-      tasks: 'lint test'
-    },
+    }, 
+
     jshint: {
       options: {
-        curly: true,
-        eqeqeq: true,
-        immed: true,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        sub: true,
-        undef: true,
-        boss: true,
-        eqnull: true
+        jshintrc: '.jshintrc'
       },
-      globals: {}
+
+      ocky: ['src/ocky.js'],
+      tests: ['tests/*.js']
     },
-    uglify: {}
+
+    uglify: {
+      options: {
+        banner: '<%= banner %>'
+      },
+      dist: {
+        src: '<%= concat.dist.dest %>',
+        dest: 'dist/ocky.min.js'
+      }
+    },
+
+    mocha: {
+      index: ['tests/index.html']
+    }
   });
 
-  // Default task.
-  grunt.registerTask('default', 'lint test concat min');
-
+  grunt.registerTask('default', ['concat', 'uglify']);
+  grunt.registerTask('test', ['jshint', 'mocha']);
 };

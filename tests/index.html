@@ -14,10 +14,10 @@
   <script src="../components/chai/chai.js"></script>
   <script src="../components/sinon.js/sinon.js"></script>
   <script src="../components/sinon-chai/lib/sinon-chai.js"></script>
+  <!--<script src="../node_modules/grunt-mocha/phantomjs/bridge.js"></script>-->
 
   <script>
-    mocha.ui('bdd');
-    mocha.reporter('html');
+    mocha.setup('bdd');
     expect = chai.expect;
   </script>
 
@@ -29,10 +29,9 @@
   <!-- tests -->
   <script src="test.js"></script>
 
-  <!-- run forest -->
+  <!-- run forest, run! -->
   <script>
-    if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
-    else { mocha.run(); }
+    mocha.globals(['script*']).run(); 
   </script>
 </body>
 </html>
