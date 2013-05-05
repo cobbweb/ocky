@@ -1,13 +1,23 @@
 {
   "name": "Ocky",
   "author": "Andrew Cobby <andrew.cobby@gmail.com>",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
-    "backbone": "~0.9.10",
     "lodash": "~1.0.1",
+  },
+  "devDependencies": {
+    "backbone": "~0.9.10",
     "mocha": "~1.8.1",
     "chai": "~1.5.0",
     "sinon.js": "latest",
     "sinon-chai": "~2.3.1"
-  }
+  },
+  "ignore": [
+    ".jshintrc",
+    ".gitignore",
+    "Gruntfile.js",
+    "index.html",
+    "tests",
+    "src"
+  ]
 }
