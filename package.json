@@ -1,7 +1,7 @@
 {
   "name": "Ocky",
-  "version": "0.0.0",
-  "description": "Module system inspired by Angular and Backbone.Marionette",
+  "version": "0.0.2",
+  "description": "Module system inspired by Backbone.Marionette",
   "directories": {
     "test": "tests"
   },

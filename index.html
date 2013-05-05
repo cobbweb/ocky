@@ -14,16 +14,10 @@
     var App = new Ocky('App');
     var OurCustomLib = function() { return 'yay'; };
 
-    Ocky.register('Backbone', Backbone);
-    Ocky.register('z', OurCustomLib);
-
     App.module('Views', function(Views, Backbone, z) {
-      Views.SearchView = Backbone.View.extend({
-        
-      });
-    });
-
-    console.log(App.Views.ListView);
+      console.log(Views);
+      console.log(Backbone);
+    }, Backbone, OurCustomLib);
   </script>
 </body>
 </html>
