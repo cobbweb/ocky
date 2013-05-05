@@ -21,7 +21,7 @@ module.exports = function(grunt) {
       },
       dist: {
         src: ['src/ocky.js'],
-        dest: 'dist/ocky.js'
+        dest: 'ocky.js'
       }
     }, 
 
@@ -40,7 +40,7 @@ module.exports = function(grunt) {
       },
       dist: {
         src: '<%= concat.dist.dest %>',
-        dest: 'dist/ocky.min.js'
+        dest: 'ocky.min.js'
       }
     },
 
