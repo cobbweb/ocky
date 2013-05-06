@@ -43,8 +43,7 @@
       } else if (names.length === 1) {
         // single child to make
         if (!_.has(this.subModules, name)) {
-          // null = skip definition <- added a few lines down
-          this[name] = this.subModules[name] = new Ocky(name, null, this);
+          this[name] = this.subModules[name] = this.createSubmodule(name);
         }
 
         submodule = this.subModules[name];
@@ -55,6 +54,10 @@
       }
 
       return submodule;
+    },
+
+    createSubmodule: function(name, definition) {
+      return new Ocky(name, definition, this);
     },
 
     addDefinition: function(definition, dependencies) {
