@@ -3,7 +3,7 @@
   "author": "Andrew Cobby <andrew.cobby@gmail.com>",
   "version": "0.0.2",
   "dependencies": {
-    "lodash": "~1.0.1",
+    "lodash": "~1.0.1"
   },
   "devDependencies": {
     "backbone": "~0.9.10",
