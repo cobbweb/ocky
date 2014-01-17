@@ -1,7 +1,7 @@
 {
   "name": "Ocky",
   "author": "Andrew Cobby <andrew.cobby@gmail.com>",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "dependencies": {
     "lodash": "2.4.1"
   },
