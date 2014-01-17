@@ -7,15 +7,21 @@ describe('Ocky', function() {
       return new Ocky('MyModule.View');
     };
 
-    var definition = sinon.spy();
-    var App = new Ocky('Application', definition);
+    beforeEach(function() {
+      this.definition = sinon.spy();
+      this.App = new Ocky('Application', this.definition);
+    });
+
+    afterEach(function() {
+      Ocky.prototype.initialize.restore();
+    });
 
     it('should make an instance of Ocky', function() {
-      expect(App).to.be.instanceof(Ocky);
+      expect(this.App).to.be.instanceof(Ocky);
     });
 
     it('should know the module name', function() {
-      expect(App).to.have.property('moduleName', 'Application');
+      expect(this.App).to.have.property('moduleName', 'Application');
     });
 
     it('should throw an error if you make a top level module with a (dot)', function() {
@@ -23,11 +29,12 @@ describe('Ocky', function() {
     });
 
     it('should run the definition in the context of the module', function() {
-      expect(definition).to.have.been.calledOn(App);
+      expect(this.definition).to.have.been.calledOn(this.App);
     });
 
     it('should run the definition with the module as the first arg', function() {
-      expect(definition.args[0][0]).to.equal(App);
+      expect(this.definition.args[0][0]).to.equal(this.App);
+    });
     });
   });
 
