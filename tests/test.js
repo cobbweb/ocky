@@ -118,4 +118,56 @@ describe('Ocky', function() {
       expect(Views.parent).to.eq(App);
     });
   });
+
+  describe('custom modules', function() {
+    var CustomModuleClass = Ocky.extend();
+
+    beforeEach(function() {
+      CustomModuleClass.prototype.initialize = sinon.spy();
+      this.CustomModule = new CustomModuleClass('Test');
+    });
+
+    it('should be extendable', function() {
+      expect(Ocky.extend).to.have.exist;
+      expect(this.CustomModule).to.be.instanceOf(CustomModuleClass);
+      expect(this.CustomModule).to.be.instanceOf(Ocky);
+    });
+
+    it('should execute the initialize method', function() {
+      expect(CustomModuleClass.prototype.initialize).to.have.been.called;
+    });
+
+    describe('custom module submodules', function() {
+      beforeEach(function() {
+        this.ChildModule = this.CustomModule.module('ChildModule');
+      });
+
+      it('should create submodules with the same class', function() {
+        expect(this.ChildModule).to.be.instanceOf(CustomModuleClass);
+      });
+    });
+
+    describe('setting a custom class for submodules', function() {
+      var AnotherCustomModuleClass = Ocky.extend();
+
+      beforeEach(function() {
+        AnotherCustomModuleClass.prototype.initialize = sinon.spy();
+        this.CustomModule.moduleClass = AnotherCustomModuleClass;
+        this.AnotherChildModule = this.CustomModule.module('AnotherChildModule');
+      });
+
+      afterEach(function() {
+        this.CustomModule.moduleClass = CustomModuleClass;
+      });
+
+      it('should create submodules with the custom module class', function() {
+        expect(this.AnotherChildModule).to.be.instanceof(AnotherCustomModuleClass);
+        expect(this.AnotherChildModule).not.to.be.instanceof(CustomModuleClass);
+      });
+
+      it('should execute the custom module class initialize', function() {
+        expect(AnotherCustomModuleClass.prototype.initialize).to.have.been.called;
+      });
+    });
+  });
 });
