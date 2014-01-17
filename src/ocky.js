@@ -9,8 +9,11 @@
   // A simple module system.
   // Provides privacy and encapsultations for modules in an application.
   var Ocky = function(moduleName, definition, parent) {
-    if (!moduleName.match(/^[a-zA-Z0-9]+$/) && !parent) {
-      throw new Error('Cannot create a sub-module without a parent module');
+    if (!parent) {
+      moduleName = moduleName || 'root';
+      if (!moduleName.match(/^[a-zA-Z0-9]+$/)) {
+        throw new Error('Cannot create a sub-module without a parent module');
+      }
     }
 
     this.moduleName  = moduleName;
