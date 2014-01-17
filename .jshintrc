@@ -25,6 +25,8 @@
     "it": true,
     "expect": true,
     "describe": true,
+    "beforeEach": true,
+    "afterEach": true,
     "sinon": true
   }
 }
