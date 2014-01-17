@@ -6,18 +6,42 @@
 </head>
 <body>
   
-  <script src="/components/lodash/lodash.js"></script>
-  <script src="/components/backbone/backbone.js"></script>
+  <script src="/bower_components/lodash/lodash.js"></script>
+  <script src="/bower_components/backbone/backbone.js"></script>
   <script src="/src/ocky.js"></script>
 
   <script>
-    var App = new Ocky('App');
+    var App = new Ocky();
     var OurCustomLib = function() { return 'yay'; };
 
     App.module('Views', function(Views, Backbone, z) {
       console.log(Views);
       console.log(Backbone);
     }, Backbone, OurCustomLib);
+
+    var ApplicationModule = Ocky.extend({
+      initialize: function() {
+        this.submoduleOption = 'swag';
+      }
+    });
+
+    var Application = Ocky.extend({
+      moduleClass: ApplicationModule,
+      
+      initialize: function() {
+        this.appOption = 'yolo';
+      }
+    });
+
+    var MyApp = new Application();
+
+    console.log(MyApp.appOption); // -> 'yolo'
+    console.log(MyApp.submoduleOption); // -> undefined
+
+    MyApp.module('Models', function(Models) {
+      console.log(Models.submoduleOption); // -> swag
+      console.log(Models.appOption); // -> undefined
+    });
   </script>
 </body>
 </html>
