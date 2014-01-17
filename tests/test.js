@@ -9,6 +9,7 @@ describe('Ocky', function() {
 
     beforeEach(function() {
       this.definition = sinon.spy();
+      sinon.spy(Ocky.prototype, 'initialize');
       this.App = new Ocky('Application', this.definition);
     });
 
@@ -35,6 +36,9 @@ describe('Ocky', function() {
     it('should run the definition with the module as the first arg', function() {
       expect(this.definition.args[0][0]).to.equal(this.App);
     });
+
+    it('should execute the initialize method', function() {
+      expect(Ocky.prototype.initialize).to.have.been.called;
     });
   });
 

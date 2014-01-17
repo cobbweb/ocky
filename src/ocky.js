@@ -12,9 +12,12 @@
       throw new Error('Cannot create a sub-module without a parent module');
     }
 
-    this.moduleName = moduleName;
-    this.subModules = {};
-    this.parent     = parent;
+    this.moduleName  = moduleName;
+    this.subModules  = {};
+    this.parent      = parent;
+    this.moduleClass = this.constructor;
+
+    this.initialize(moduleName, definition, parent);
 
     if (definition && _.isFunction(definition)) {
       this.addDefinition(definition);
@@ -22,6 +25,12 @@
   };
 
   _.extend(Ocky.prototype, {
+
+    /**
+     * Empty initialize method that can be used by classes that extend Ocky
+     * This is executed during module instantation, before it has any definition.
+     */
+    initialize: function() {},
 
     _processName: function(moduleNames) {
       return moduleNames.split('.');
