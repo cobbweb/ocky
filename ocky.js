@@ -1,4 +1,4 @@
-/*! Ocky - v0.0.3 - 2014-01-17
+/*! ocky - v0.1.0 - 2014-01-23
 * Copyright (c) 2014 Andrew Cobby <andrew.cobby@gmail.com>; Licensed MIT */
 (function(window) {
   'use strict';
@@ -10,14 +10,17 @@
   // A simple module system.
   // Provides privacy and encapsultations for modules in an application.
   var Ocky = function(moduleName, definition, parent) {
-    if (!moduleName.match(/^[a-zA-Z0-9]+$/) && !parent) {
-      throw new Error('Cannot create a sub-module without a parent module');
+    if (!parent) {
+      moduleName = moduleName || 'root';
+      if (!moduleName.match(/^[a-zA-Z0-9]+$/)) {
+        throw new Error('Cannot create a sub-module without a parent module');
+      }
     }
 
     this.moduleName  = moduleName;
     this.subModules  = {};
     this.parent      = parent;
-    this.moduleClass = this.constructor;
+    this.moduleClass = this.moduleClass || this.constructor;
 
     this.initialize(moduleName, definition, parent);
 
